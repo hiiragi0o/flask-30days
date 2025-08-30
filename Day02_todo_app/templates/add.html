@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <!-- main.pyのadd関数にPOSTリクエストを送信 -->
+    <form method="post" action="{{ url_for("add") }}" >
+        <div class="mb-3">
+            <!-- タスク名を入力するフォーム -->
+            <label for="exampleInputEmail1" class="form-label">タスク</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="task">
+        </div>
+        <div class="mb-3">
+            <!-- タスク内容を入力するフォーム -->
+            <label for="exampleInputPassword1" class="form-label">タスク内容</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" name="detail">
+        </div>
+        <button type="submit" class="btn btn-primary">登録する</button>
+        </form>
+{% endblock %}
