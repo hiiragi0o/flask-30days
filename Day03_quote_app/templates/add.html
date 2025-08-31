@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="text-center mb-5 display-6 fw-bold">名言を加えましょう</h1>
+    <!-- 名言追加用のフォーム、methodはPOST、actionはaddルートに設定 -->
+    <div class="card shadow-sm mx-auto mb-5" style="max-width: 800px;">
+        <div class="card-body">
+            <form method="post" action="{{ url_for('add') }}">
+                <div class="mb-3">
+                <!-- 名言を入力するフォーム -->
+                <label for="quote" class="form-label">名言</label>
+                <input type="text" class="form-control" id="quote" name="quote" placeholder="名言を入力してください">
+                </div>
+                <div class="mb-3">
+                    <!-- 作者名を入力するフォーム -->
+                    <label for="author" class="form-label">作者名</label>
+                    <input type="text" class="form-control" id="author" name="author" placeholder="作者名を入力してください">
+                </div>
+                <small class="text-muted">※追加された名言は、名言リストの末尾に追加されます。</small>
+                <button type="submit" class="btn btn-primary w-100">名言を追加</button>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="text-center mb-5 display-6 fw-bold">名言リスト</h2>
+    <div style="max-width: 100%;">
+        {% for quote in quotes %}
+        <div class-"col">
+            <div class="card-body">
+                <blockquote class="blockquote mb-3">
+                <p class="mb-2">"{{ quote.quote }}"</p>
+                <footer class="blockquote-footer">{{ quote.author }}</footer>
+                </blockquote>
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+
+    <div class="mt-5 text-center">
+        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">トップに戻る</a>
+    </div>
+
+{% endblock %}

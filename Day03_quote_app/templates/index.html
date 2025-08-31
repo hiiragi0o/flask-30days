@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="mb-4 text-center">名言引用アプリ</h1>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3" style="max-width: 800px; margin: auto;">
+        <!-- ページをリロード -->
+        <a href="{{ url_for('index') }}" class="btn btn-primary w-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+            </svg>
+            名言を引用
+        </a>
+        <a href="{{ url_for('add') }}" class="btn btn-secondary w-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4"/>
+            </svg>
+            リスト参照・名言を追加
+        </a>
+    </div>
+        <div class="mx-auto" style="max-width: 800px;">
+            <div class="card">
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>「{{ quote }}」</p>
+                        <footer class="blockquote-footer mt-2">{{ author }}</footer>
+                    </blockquote>
+                </div>
+            </div>
+            <img src="{{ url_for('static', filename=random_image )}}" style="width: 100%; height: 400px; object-fit: cover; object-position: center;" class="d-block mx-auto mt-3" />
+        </div>
+{% endblock %}
