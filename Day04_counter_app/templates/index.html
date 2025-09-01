@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>数字カウンター</title>
+</head>
+<body>
+    <h1>現在のカウント：{{ count }}</h1>
+    <a href="{{ url_for('increment') }}">+1 する</a>
+    <br>
+    <a href="{{ url_for('decrement') }}">-1 する</a>
+    <br>
+    <a href="{{ url_for('reset') }}">リセット</a>
+
+</body>
+</html>
