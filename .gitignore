@@ -3,3 +3,5 @@ myvenv
 */venv/
 __pycache__/
 *.pyc
+.env
+db.sqlite3
