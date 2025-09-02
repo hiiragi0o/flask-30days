@@ -19,7 +19,7 @@ URL
 * **外部API**: OpenWeather, NewsAPI, GitHub API, Google Books API など
 * **その他**: JSON, CSV, Pillow(画像処理), Markdown, qrcode, （本番環境デプロイ）
 
-
+* **作業環境**: macOS Sequoia 15.6.1
 
 ## ディレクトリ構成
 

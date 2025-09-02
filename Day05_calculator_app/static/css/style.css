@@ -1,0 +1,22 @@
+body {
+    font-family: Areal, sans serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+form {
+    margin: 20px auto;
+    padding: 20px;
+    display: inline-block;
+    border: 1px solid #add;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+input,
+select,
+button {
+    margin: 5px;
+    padding: 8px;
+    font-size: 16px;
+}
