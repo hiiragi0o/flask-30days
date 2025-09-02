@@ -4,25 +4,45 @@
     <meta charset="UTF-8">
     <title>Calculator</title>
     <!-- CSS読み込み -->
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <h1>計算機アプリ</h1>
-    <form method="POST" action="/">
-        <input type="number" name="num1" placehoder="数値1" required>
-        <select name="operation">
+    <form id="calcForm">
+        <input type="number" id="num1" placeholder="数値1" required>
+        <select id="operation">
             <option value="add">+</option>
             <option value="sub">-</option>
             <option value="mul">×</option>
             <option value="div">÷</option>
         </select>
-        <input type="number" name="num2" placehoder="数値2" required>
+        <input type="number" id="num2" placeholder="数値2" required>
         <button type="submit">計算</button>
     </form>
 
-    {% if result is not none %}
-        <h2>結果：{{ result }}</h2>
-    {% endif %}
+    <h2 id="result"></h2>
 
+    <script>
+        document.getElementById("calcForm").addEventListener("submit", function(e){
+            e.preventDefault(); // これで通常の送信を止める
+            const num1 = document.getElementById("num1").value;
+            const num2 = document.getElementById("num2").value;
+            const operation = document.getElementById("operation").value;
+
+            fetch("/calculate", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ num1, num2, operation })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error){
+                    document.getElementById("result").textContent = "エラー： " + data.error;
+                } else {
+                    document.getElementById("result").textContent = "結果： " + data.result;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
