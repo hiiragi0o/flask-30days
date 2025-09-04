@@ -23,8 +23,8 @@ def index():
     for city, tz in citiez.items():
         # タイムゾーンを設定
         timezone = pytz.timezone(tz)
-        # 現在のUTC時刻を取得（Moment.jsで動かすため）
-        utc_now = datetime.now(timezone).astimezone(pytz.utc) # 世界協定時　+00:00
+        # タイムゾーンで時刻を取得して、さらに正確な世界協定時UTCに変換（Moment.jsで動かすため）
+        utc_now = datetime.now(timezone).astimezone(pytz.utc)
         # UTC時刻を各都市の時刻に変換
         world_times[city] = utc_now
     return render_template('index.html', world_times=world_times, citiez=citiez)
