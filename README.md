@@ -173,7 +173,10 @@ Flask30Days/
 
 アクセス時点のサーバー時刻を表示。 <br>
 使用技術：Flask（ルーティング）, datetimeモジュール, HTML, CSS
-学習のポイント：サーバー側で datetime モジュールを使って「現在時刻」を取得する。
+学習のポイント：
+- datetime モジュールを使って「現在時刻」を取得する。
+- flask-moment（Flaskの拡張機能）を使って JavaScript の moment.js ライブラリを扱う
+- pytz（Pythonでタイムゾーンを扱うためのライブラリ）を使って、世界中のタイムゾーン情報を取得
 
 ---
 
