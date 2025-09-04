@@ -172,7 +172,8 @@ Flask30Days/
 ### Day07 - 現在時刻表示
 
 アクセス時点のサーバー時刻を表示。 <br>
-使用技術：Flask（ルーティング）, datetimeモジュール, HTML
+使用技術：Flask（ルーティング）, datetimeモジュール, HTML, CSS
+学習のポイント：サーバー側で datetime モジュールを使って「現在時刻」を取得する。
 
 ---
 
