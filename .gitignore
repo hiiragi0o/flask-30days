@@ -5,3 +5,5 @@ __pycache__/
 *.pyc
 .env
 db.sqlite3
+# 特定の static/ フォルダを除外
+Day08_image_viewer_app/static/
