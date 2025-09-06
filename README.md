@@ -183,14 +183,23 @@ Flask30Days/
 ### Day08 - 画像アップロード表示
 
 画像をアップロードしてブラウザに表示。 <br>
-使用技術：Flask（ファイルアップロード処理 / request.files）, HTML
+使用技術：Flask, HTML, werkzeug（セキュリティ付きファイル保存）
+学習のポイント：
+* Flaskでファイルアップロード処理（request.files, redirect, flash）の流れを学ぶ
+* werkzeugの`secure_filename`で安全にファイル名を処理する方法を理解する
+* staticフォルダに保存し、URLから画像を取得・表示する仕組みを実装する
+
 
 ---
 
 ### Day09 - JSON API
 
 固定データをJSON形式で返すAPI。 <br>
-使用技術：Flask（`jsonify` / APIエンドポイント作成）
+使用技術：Flask（`jsonify` / APIエンドポイント作成 / Response）, jsonモジュール, timeモジュール
+学習のポイント：
+* **エンドポイント**を作り、APIサーバーとしての構成を体験する。
+* `jsonify` と `json.dumps(..., ensure_ascii=False)` を使い分けてJSONレスポンスを返す方法を理解する。
+
 
 ---
 
