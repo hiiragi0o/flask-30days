@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Markdown_previewer</title>
+    </head>
+
+    <body>
+        <h1>Markdownプレビューアプリ</h1>
+        <form method="POST">
+            <textarea name="markdown_text" rows="10" cols="50">{{ markdown_text }}</textarea><br>
+            <button type="submit">変換</button>
+        </form>
+        <h2>プレビュー</h2>
+        <div style="border: 1px solid #ccc; padding: 10px;">
+            <!-- |safe フィルタを使って変換結果をそのまま表示 -->
+            {{ html_preview|safe }}
+        </div>
+    </body>
+
+</html>

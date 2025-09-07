@@ -205,8 +205,12 @@ Flask30Days/
 
 ### Day10 - Markdownプレビュー
 
-入力MarkdownをHTMLに変換して表示。 <br>
-使用技術：Flask（フォーム送信処理）, markdownライブラリ, HTML
+入力したMarkdownをHTMLに変換して表示。 <br>
+使用技術：Flask（フォーム送信処理）, markdownライブラリ, HTML, Jinja2（`safe` フィルタ）
+学習のポイント：
+* **外部ライブラリ（markdown）** を使い、文字列を別の形式（Markdown→HTML）に変換する方法を学ぶ。
+* **テンプレートでの表示制御**（エスケープと `safe` フィルタ）を理解し、変換後のHTMLをそのまま表示する仕組みを学ぶ。
+
 
 ---
 
