@@ -1,3 +1,4 @@
+# （外部API）ExchangeRate-APIでAPI取得してjsonで確認
 import os
 from flask import Flask, jsonify, jsonify, render_template
 from flask.cli import load_dotenv
