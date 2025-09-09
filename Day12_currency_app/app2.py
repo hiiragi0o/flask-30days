@@ -1,7 +1,7 @@
 # （外部API）ExchangeRate-APIでAPI取得してhtmlで表示
 # ドル円の為替レートを表示
 import os
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template
 from flask.cli import load_dotenv
 import requests
 
@@ -28,7 +28,7 @@ def index2():
         if jpy_rate is not None:
             input_usd = 1 # 1USDとする
             output_jpy = int(input_usd * jpy_rate) # 整数化
-            # 💡 このprint文はターミナルに出力されます
+            # このprint文はターミナルに出力されます
             print(f"1 USD = {output_jpy} JPY") # デバッグ用 ターミナルに表示
         else:
             print("エラー: JPYの為替レートが見つかりませんでした。")
