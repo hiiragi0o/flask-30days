@@ -216,8 +216,14 @@ Flask30Days/
 
 ### Day11 - 天気情報表示
 
-OpenWeather APIを利用して都市の天気を取得。 <br>
-使用技術：Flask（外部APIとの通信）, requestsライブラリ, HTML
+OpenWeather APIを利用して都市の天気を取得。 JSON形式で返す。<br>
+使用技術：Flask, requests（外部API通信）, JSON, dotenv（環境変数管理）
+学習のポイント：
+
+* `.env` にAPIキーを保存し、環境変数として安全に読み込む。
+* 外部API（OpenWeatherMap）を呼び出し、取得したJSONデータを加工して返す方法を学ぶ。
+* 日本語やエラーハンドリングに対応したAPIレスポンスの返し方を学ぶ。
+
 
 ---
 

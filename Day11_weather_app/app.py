@@ -5,7 +5,6 @@ import requests
 
 load_dotenv() # .env を読み込む
 API_KEY = os.getenv('API_KEY') # .envを使うために必要
-print(API_KEY)
 
 app = Flask(__name__)
 
