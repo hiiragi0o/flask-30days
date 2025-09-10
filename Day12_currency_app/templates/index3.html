@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Currency_app</title>
+    </head>
+
+    <body>
+        <h1>為替レート表示アプリ</h1>
+        <div>
+            <p>日本円でいくら？</p>
+            <p>価格を入力して、通貨を選択してください。日本円でいくらか知ることができます。<br>$0.99 など少数2桁も入力できます。</p>
+
+                <form method="POST">
+                    <!-- step="0.01" → 0.99 などの小数入力を可能にする -->
+                    <input type="number" name="num" step="0.01" placeholder="ここに価格を入力" required>
+                    <select name="operation">
+                        {% for code, rate, name_ja in rates_display %}
+                            <option value="{{ code }}"
+                                {% if selected_currency == code %}selected{% endif %}>
+                                {{ name_ja }} {{ code }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">換算</button>
+                </form>
+
+                {% if error_message %}
+                    <p style="color:red;">{{ error_message }}</p>
+                {% endif %}
+
+                {% if result is not none %}
+                    <p>{{ input_value }} {{ selected_currency }} = {{ result }} JPY</p>
+                {% endif %}
+        </div>
+
+        <hr>
+        <h2>参考: JPY 基準の為替レート</h2>
+        <p>為替レートのデータは1日1回更新されます。</p>
+            <ul>
+                {% for code, rate, name_ja in rates_display %}
+                    <li>{{ name_ja }} {{ code }} : {{ rate }}</li>
+                {% endfor %}
+            </ul>
+    </body>
+
+</html>
