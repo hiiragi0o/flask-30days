@@ -5,44 +5,64 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Currency_app</title>
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
 
-    <body>
-        <h1>為替レート表示アプリ</h1>
-        <div>
-            <p>日本円でいくら？</p>
-            <p>価格を入力して、通貨を選択してください。日本円でいくらか知ることができます。<br>$0.99 など少数2桁も入力できます。</p>
+    <body class="bg-light">
+        <div class="container py-5">
+            <h1 class="mb-4 text-center">為替レート表示アプリ</h1>
 
-                <form method="POST">
-                    <!-- step="0.01" → 0.99 などの小数入力を可能にする -->
-                    <input type="number" name="num" step="0.01" placeholder="ここに価格を入力" required>
-                    <select name="operation">
+            <div class="card shadow-sm p-4 mb-4">
+                <p class="mb-3 h4">日本円でいくら？</p>
+                <p class="text-muted">価格を入力して、通貨を選択してください。日本円でいくらか知ることができます。<br>$0.99 など少数2桁も入力できます。</p>
+
+                    <form method="POST" class="row g-3">
+                        <div class="col-md-6">
+                            <label for="num" class="form-label">金額</label>
+                            <!-- step="0.01" → 0.99 などの小数入力を可能にする -->
+                            <input type="number" id="num" name="num" step="0.01" class="form-control" placeholder="ここに価格を入力" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="operation" class="form-label">通貨を選択</label>
+                            <select id="operation" name="operation" class="form-select">
+                                {% for code, rate, name_ja in rates_display %}
+                                    <option value="{{ code }}"
+                                        {% if selected_currency == code %}selected{% endif %}>
+                                        {{ name_ja }} {{ code }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary w-100">換算</button>
+                        </div>
+                    </form>
+
+                    {% if error_message %}
+                        <p style="color:red;">{{ error_message }}</p>
+                    {% endif %}
+
+                    {% if result is not none %}
+                        <div class="alert alert-success mt-4" role="alert">
+                            <strong>{{ input_value }} {{ selected_currency }}</strong> = <strong>{{ result }} JPY</strong>
+                        </div>
+                    {% endif %}
+            </div>
+
+            <div class="card shadow-sm p-4">
+                <h2 class="h5">参考: JPY 基準の為替レート</h2>
+                <pclass="text-muted">為替レートのデータは1日1回更新されます。</pclass=>
+                    <ul class="list-group">
                         {% for code, rate, name_ja in rates_display %}
-                            <option value="{{ code }}"
-                                {% if selected_currency == code %}selected{% endif %}>
-                                {{ name_ja }} {{ code }}</option>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>{{ name_ja }} {{ code }}</span>
+                                <span>{{ rate }}</span>
+                            </li>
                         {% endfor %}
-                    </select>
-                    <button type="submit">換算</button>
-                </form>
-
-                {% if error_message %}
-                    <p style="color:red;">{{ error_message }}</p>
-                {% endif %}
-
-                {% if result is not none %}
-                    <p>{{ input_value }} {{ selected_currency }} = {{ result }} JPY</p>
-                {% endif %}
+                    </ul>
+            </div>
         </div>
-
-        <hr>
-        <h2>参考: JPY 基準の為替レート</h2>
-        <p>為替レートのデータは1日1回更新されます。</p>
-            <ul>
-                {% for code, rate, name_ja in rates_display %}
-                    <li>{{ name_ja }} {{ code }} : {{ rate }}</li>
-                {% endfor %}
-            </ul>
     </body>
 
 </html>
