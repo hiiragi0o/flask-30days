@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Github_user_info</title>
+    </head>
+
+    <body>
+        <h1>GitHubユーザー情報表示</h1>
+        <div>
+            <p>hiiragi0o のユーザー情報です。</p>
+            {% for name_ja, data in data_display %}
+                {% if name_ja == "アイコン" %}
+                    <!-- アイコンを画像として表示 -->
+                    <p>{{ name_ja }} : <img src="{{ data }}" alt="アイコン" width="100"></p>
+
+                {% elif name_ja == "リポジトリ名" %}
+                    <!-- リポジトリ名のリストをループして表示 -->
+                    <p>{{ name_ja }}:</p>
+                    <ul>
+                        {% for repo in data %}
+                            <li>{{ repo }}</li>
+                        {% endfor %}
+                    </ul>
+
+                {% else %}
+                <!-- それ以外の項目は通常表示 -->
+                <p>{{ name_ja }} : {{ data }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </body>
+
+</html>
