@@ -4,6 +4,9 @@ myvenv
 __pycache__/
 *.pyc
 .env
-db.sqlite3
+
+# DB（学習用に db_v1.sqlite などを作成したため）
+*.sqlite
+
 # 特定の static/ フォルダを除外
 Day08_image_viewer_app/static/
