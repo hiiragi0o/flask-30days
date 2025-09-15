@@ -24,7 +24,7 @@
         {% endif %}
 
         <ul>
-            {% for article in articles %}
+            {% for article in all_articles %}
                 <li>
                     <!-- 記事から['url']['title']を取り出す -->
                     <a href="{{ article['url'] }}">{{ article['title'] }}</a>
