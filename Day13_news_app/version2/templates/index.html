@@ -13,7 +13,7 @@
             {% for article in articles %}
             <li>
                 <!-- title を取り出す -->
-                <a href="{{ article['url'] }}">{{ article['title'] }}</a>
+                <a href="{{ article['url'] }}">{{ article['title'] }}</a> <!-- 記事から['url']['title']を取り出す -->
             </li>
             {% endfor %}
         </ul>

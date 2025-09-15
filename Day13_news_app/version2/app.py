@@ -2,19 +2,19 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template
-import requests
+from newsapi import NewsApiClient # requests の代わりに newsapi 公式ライブラリを使う
 
 load_dotenv()
 API_KEY = os.getenv('API_KEY')
 
 app = Flask(__name__)
+newsapi = NewsApiClient(api_key=API_KEY) # NewsApiClient のインスタンスを作成
 
 @app.route('/')
 def index():
-    # 日本 のニュース top-headlines を取得
-    url = f'https://newsapi.org/v2/top-headlines?country=us&apiKey={API_KEY}'
-    response = requests.get(url)
-    articles = response.json()['articles'] # 記事部分だけ取り出す
+    # アメリカのニュース top-headlines を取得
+    top_headlines =  newsapi.get_top_headlines(language='en',country='us')
+    articles = top_headlines['articles'] # 記事部分だけ取り出す
     return render_template('index.html', articles=articles)
 
 if __name__ == '__main__':
