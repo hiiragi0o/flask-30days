@@ -1,23 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>News App</title>
     </head>
 
     <body>
-        <h1>Top Headlines</h1>
+        <h1>News Search</h1>
+        <form method="post">
+            <input
+                type="text"
+                name="keyword"
+                placeholder="キーワードを入れてください"
+            />
+            <button type="submit">検索</button>
+        </form>
+
+        {% if keyword %}
+            <h2>"{{ keyword }}" の検索結果</h2>
+        {% else %}
+            <h2>トップニュース</h2>
+        {% endif %}
+
         <ul>
             {% for article in articles %}
-            <li>
-                <!-- title を取り出す -->
-                <a href="{{ article['url'] }}">{{ article['title'] }}</a> <!-- 記事から['url']['title']を取り出す -->
-            </li>
+                <li>
+                    <!-- 記事から['url']['title']を取り出す -->
+                    <a href="{{ article['url'] }}">{{ article['title'] }}</a>
+                </li>
             {% endfor %}
         </ul>
-
     </body>
-
 </html>
