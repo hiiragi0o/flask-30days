@@ -14,11 +14,23 @@
                 name="keyword"
                 placeholder="キーワードを入れてください"
             />
+            <label>
+                <input
+                    type="checkbox"
+                    name="translate"
+                    value="yes"
+                    {% if translated %}checked{% endif %}
+                />
+                翻訳する
+            </label>
             <button type="submit">検索</button>
         </form>
 
         {% if keyword %}
-            <h2>"{{ keyword }}" の検索結果</h2>
+            <h2>
+                "{{ keyword }}"
+                の検索結果{% if translated %}(翻訳済み){% endif %}
+            </h2>
         {% else %}
             <h2>トップニュース</h2>
         {% endif %}
@@ -28,6 +40,8 @@
                 <li>
                     <!-- 記事から['url']['title']を取り出す -->
                     <a href="{{ article['url'] }}">{{ article['title'] }}</a>
+                    <p>{{ article['description'] }}</p>
+                    <p>{{ article['source']['name'] }}</p>
                 </li>
             {% endfor %}
         </ul>

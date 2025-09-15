@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
+from googletrans import Translator # Google翻訳
 from newsapi import NewsApiClient # requests の代わりに newsapi 公式ライブラリを使う
 
 load_dotenv()
@@ -8,6 +9,7 @@ API_KEY = os.getenv('API_KEY')
 
 app = Flask(__name__)
 newsapi = NewsApiClient(api_key=API_KEY) # NewsApiClient のインスタンスを作成
+translator = Translator() # Translator のインスタンスを作成
 
 # helper関数：全ニュースソースとドメインを取得して、カンマ区切りで渡す
 def get_source_and_domains():
@@ -31,8 +33,14 @@ def get_source_and_domains():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    # POSTアクセス時の初期値
+    keyword = None
+    translated = False
+
     if request.method == 'POST':
-        keyword = request.form['keyword']
+        keyword = request.form.get('keyword')
+        # チェックボックスの値を確認
+        translated = request.form.get('translate') == 'yes'
 
         # 全ソースとドメインを取得
         sources, domains = get_source_and_domains()
@@ -59,7 +67,16 @@ def index():
             sort_by='relevancy',
             page_size=no_of_articles # 取得する記事数を指定(100件まで)
         )['articles']
-        return render_template('index.html', all_articles=all_articles, keyword=keyword)
+
+        # 翻訳オプションがONなら翻訳
+        if translated:
+            for article in all_articles:
+                if article.get('title'):
+                    article['title'] = translator.translate(article['title'], src='en', dest='ja').text
+                if article.get('description'):
+                    article['description'] = translator.translate(article['description'], src='en', dest='ja').text
+
+        return render_template('index.html', all_articles=all_articles, keyword=keyword, translated=translated)
 
     else:
         # GETアクセス時はトップヘッドラインを表示
@@ -69,7 +86,7 @@ def index():
                         language='en',
                         page_size=total_results
         )['articles']
-        return render_template('index.html', all_articles=all_headlines)
+        return render_template('index.html', all_articles=all_headlines, keyword=keyword, translated=translated)
 
 if __name__ == '__main__':
     app.run(debug=True)
