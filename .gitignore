@@ -5,7 +5,17 @@ __pycache__/
 *.pyc
 .env
 
-# DB（学習用に db_v1.sqlite などを作成したため）
+# Node.js依存パッケージ
+node_modules/
+
+# VS Code個人設定
+.vscode/
+
+# OSやエディタの一時ファイル
+.DS_Store
+*.swp
+
+# DB
 *.sqlite
 
 # 特定の static/ フォルダを除外
