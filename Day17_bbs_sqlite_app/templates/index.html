@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
     <a href="/create" role="button">新規作成</a>
-
+    <a href="/logout" role="button">ログアウト</a>
     {% for post in posts %}
         <article>
-            <a href="/{{ post.id }}/update" role="button">編集</a>
-            <a href="/{{ post.id }}/delete" role="button">削除</a>
+            <img
+                src="{{ url_for('static', filename='img/' + post.img_name) }}"
+                width="150"
+                height="100"
+            />
             <h2>{{ post.title }}</h2>
             <p>{{ post.created_at }}</p>
             <p>{{ post.body }}</p>
+            <a href="/{{ post.id }}/update" role="button">編集</a>
+            <a href="/{{ post.id }}/delete" role="button">削除</a>
         </article>
     {% endfor %}
 {% endblock %}

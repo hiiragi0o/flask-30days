@@ -2,11 +2,13 @@
 {% block title %}新規登録{% endblock %}
 {% block content %}
     <h1>新規登録</h1>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <label for="title">タイトル</label>
         <input type="text" name="title" id="title" />
         <label for="body">内容</label>
         <input type="text" name="body" id="body" />
+        <label for="fileUpload">画像</label>
+        <input type="file" name="img" id="fileUpload" />
         <!-- 投稿ボタン -->
         <input type="submit" name="新規登録" value="投稿" />
     </form>

@@ -32,6 +32,17 @@ migrate = Migrate(app, db) # Migrateのインスタンスを作成
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+# user 識別のため必須
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id)) # 引数に文字列がくるため整数型に変換
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(30), unique=True, nullable=False)
+    password = db.Column(db.String(120), unique=False, nullable=False)
+
+
 # Post用のモデルクラス
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,15 +58,22 @@ def index():
     return render_template('index.html', posts=posts)
 
 @app.route('/create', methods=['GET','POST'])
+# @login_required
 def create():
     if request.method == 'GET':
         return render_template('create.html')
+    
     elif request.method == 'POST':
+        file = request.files['img'] # ファイルを取得
+        filename = file.filename # ファイル名を取得
+        img_name = os.path.join(app.static_folder, 'img', filename) # パスを作成
+        file.save(img_name) # 保存
+
         title = request.form.get('title')
         body = request.form.get('body')
-        post = Post(title=title, body=body) # PostgreSQLへ保存
-        db.session.add(post) # PostgreSQLへ保存
-        db.session.commit() # PostgreSQLへ保存
+        post = Post(title=title, body=body, img_name=filename)
+        db.session.add(post)
+        db.session.commit()
     return redirect('/')
 
 @app.route('/<int:post_id>/update', methods=['GET','POST']) # idをキーにする

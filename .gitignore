@@ -20,3 +20,4 @@ node_modules/
 
 # 特定の static/ フォルダを除外
 Day08_image_viewer_app/static/
+Day17_bbs_sqlite_app/static/
