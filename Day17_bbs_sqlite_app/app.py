@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import pytz
 
@@ -29,24 +29,39 @@ class Post(db.Model):
 
 @app.route('/')
 def index():
-    posts =[
-        {
-        'title': '記事のタイトル',
-        'body': '記事の内容',
-        'created_at': '2020-01-01'
-    },
-    {
-        'title': '記事のタイトル2',
-        'body': '記事の内容2',
-        'created_at': '2020-01-02'
-    },
-    {
-        'title': '記事のタイトル3',
-        'body': '記事の内容3',
-        'created_at': '2020-01-03'
-    }
-    ]
+    posts = Post.query.all() # 全ての投稿を取得
     return render_template('index.html', posts=posts)
+
+@app.route('/create', methods=['GET','POST'])
+def create():
+    if request.method == 'GET':
+        return render_template('create.html')
+    elif request.method == 'POST':
+        title = request.form.get('title')
+        body = request.form.get('body')
+        post = Post(title=title, body=body) # PostgreSQLへ保存
+        db.session.add(post) # PostgreSQLへ保存
+        db.session.commit() # PostgreSQLへ保存
+    return redirect('/')
+
+@app.route('/<int:post_id>/update', methods=['GET','POST']) # idをキーにする
+def update(post_id): # 引数
+    post = Post.query.get(post_id) # 投稿を取得
+    if request.method == 'POST':
+        post.title = request.form.get('title') # post.が必要
+        post.body = request.form.get('body')
+        db.session.commit() # DB更新
+        return redirect('/')
+
+    else:
+        return render_template('update.html', post=post) # GET でpost を表示
+
+@app.route('/<int:post_id>/delete') # idをキーにする
+def delete(post_id): # 引数
+    post = Post.query.get(post_id)
+    db.session.delete(post) # 削除
+    db.session.commit() # DB更新
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)
