@@ -65,8 +65,25 @@ def url_redirect(id): # 引数
     
     # 無効なURLの場合
     else:
-        flash('Invalid URL')
+        flash('無効な短縮 URL です')
         return redirect(url_for('index'))
+
+@app.route('/stats')
+def stats():
+    conn = get_db_connection()
+    # urls テーブルから id, created, original_url, clicks カラムを取得
+    db_urls = conn.execute('SELECT id, created, original_url, clicks FROM urls'
+                            ).fetchall()
+    
+    conn.close()
+
+    urls = []
+    for url in db_urls:
+        url = dict(url) # sqlite3.Row オブジェクトを辞書に変換
+        url['short_url'] = request.host_url + hashids.encode(url['id'])
+        urls.append(url) # urls リストに追加
+
+    return render_template('stats.html', urls=urls)
 
 if __name__ == '__main__':
     app.run(debug=True)
