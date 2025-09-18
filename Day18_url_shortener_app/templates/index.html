@@ -1,3 +1,28 @@
 {% extends "base.html" %}
+
 {% block content %}
+    <h1>{% block title %}短縮URLサービスへようこそ{% endblock %}</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label for="url">URL</label>
+            <input
+                type="text"
+                name="url"
+                id="url"
+                placeholder="短縮したいURLを入力してください"
+                class="form-control mb-3"
+                value="{{ request.form['url'] }}"
+                autofocus
+            />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">送信</button>
+        </div>
+    </form>
+
+    {% if short_url %}
+        <hr />
+        <span>{{ short_url }}</span>
+    {% endif %}
 {% endblock %}
