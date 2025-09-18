@@ -14,7 +14,6 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     conn = get_db_connection() # DB接続
@@ -39,6 +38,35 @@ def index():
         return render_template('index.html', short_url=short_url)
 
     return render_template('index.html')
+
+@app.route('/<id>')
+def url_redirect(id): # 引数
+    conn = get_db_connection()
+
+    original_id = hashids.decode(id)# idをもとのidに変換
+
+    # もとのidが存在する場合
+    if original_id:
+        original_id = original_id[0] # もとのidを取得
+        # もとのURLをDBから取得
+        url_data = conn.execute('SELECT original_url, clicks FROM urls'
+                                ' WHERE id = (?)', (original_id,)
+                                ).fetchone()
+        original_url = url_data['original_url']
+        clicks = url_data['clicks'] # クリック数を取得
+
+        # クリック数を1増やす
+        conn.execute('UPDATE urls SET clicks = ? WHERE id = ?',
+                    (clicks+1, original_id))
+
+        conn.commit()
+        conn.close()
+        return redirect(original_url)
+    
+    # 無効なURLの場合
+    else:
+        flash('Invalid URL')
+        return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
