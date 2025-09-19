@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}記事の詳細{% endblock %}
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <article>
+        <img
+            src="{{ url_for('static', filename='img/' + post.img_name) }}"
+            width="800"
+            height="500"
+        />
+        <p>{{ post.created_at }}</p>
+        <p>{{ post.body }}</p>
+        <a href="/{{ post.id }}/update" role="button">編集</a>
+        <a href="/{{ post.id }}/delete" role="button">削除</a>
+    </article>
+{% endblock %}

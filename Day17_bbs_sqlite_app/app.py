@@ -106,5 +106,10 @@ def delete(post_id): # 引数
     db.session.commit() # DB更新
     return redirect('/')
 
+@app.route('/<int:post_id>/readmore')
+def readmore(post_id):
+    post = Post.query.get(post_id)
+    return render_template('readmore.html', post=post)
+
 if __name__ == '__main__':
     app.run(debug=True)

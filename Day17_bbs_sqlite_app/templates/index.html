@@ -12,6 +12,7 @@
             <h2>{{ post.title }}</h2>
             <p>{{ post.created_at }}</p>
             <p>{{ post.body }}</p>
+            <a href="/{{ post.id }}/readmore" role="button">詳しく読む</a>
             <a href="/{{ post.id }}/update" role="button">編集</a>
             <a href="/{{ post.id }}/delete" role="button">削除</a>
         </article>
