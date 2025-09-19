@@ -1,25 +1,22 @@
 # Flask 30日チャレンジ
-URL
- https://*****.com デプロイは未定<br >
 
 <br><br>
+
 ## 概要
 
-これは **Flask 30日チャレンジ** の成果物をまとめたものです。<br>
-「1日1アプリ＝必ず完成させる」を目標に、30日間で小さなWebアプリを作り続けました。<br>
+これは **Flask 30日チャレンジ** をまとめたものです。<br>
+「1日1アプリ完成させる」を目標に、30日間で小さなWebアプリを作り続けました。<br>
 シンプルでも動くものを完成させることを重視し、Flaskの基礎からAPI連携・DB活用・簡易ゲームまで、幅広く習得しました。
-
-
 
 ## 使用技術
 
-* **バックエンド**: Python 3.11.7 / Flask 3.1.2
-* **フロントエンド**: HTML, CSS (Bootstrap含む), JavaScript
-* **データベース**: SQLite
-* **外部API**: OpenWeather, NewsAPI, GitHub API, Google Books API など
-* **その他**: JSON, CSV, Pillow(画像処理), Markdown, qrcode, （本番環境デプロイ）
+- **バックエンド**: Python 3.11.7 / Flask 3.1.2
+- **フロントエンド**: HTML, CSS (Bootstrap含む), JavaScript
+- **データベース**: SQLite
+- **外部API**: OpenWeather, NewsAPI, GitHub API, Google Books API など
+- **その他**: JSON, CSV, Pillow(画像処理), Markdown, qrcode, （本番環境デプロイ）
 
-* **作業環境**: macOS Sequoia 15.6.1
+- **作業環境**: macOS Sequoia 15.6.1
 
 ## ディレクトリ構成
 
@@ -32,28 +29,22 @@ Flask30Days/
 ...
 ```
 
-
 ## 学んだこと
 
-* Flaskを使った **Webアプリ開発の基本フロー**
-* 外部API連携やSQLiteを使った **データ処理**
-* HTML/CSS/JavaScriptを組み合わせた **フロント実装力**
-* 30日間での **継続的な学習と成果物の完成**
-
-
-
+- Flaskを使った **Webアプリ開発の基本フロー**
+- 外部API連携やSQLiteを使った **データ処理**
+- HTML/CSS/JavaScriptを組み合わせた **フロント実装力**
+- 30日間での **継続的な学習と成果物の完成**
 
 ## Flask を選んだ理由
 
-  * 「ルーティング」「リクエスト/レスポンス」など、Web開発の基本をしっかり経験できる。
-  * Flaskは実務でもAPI開発や小規模サービスで使われる。
-  * Django より軽量。(Django は学習済み)
-  * 毎日「完成」が実現しやすい。
-<br>
-
+- 「ルーティング」「リクエスト/レスポンス」など、Web開発の基本をしっかり経験できる。
+- Flaskは実務でもAPI開発や小規模サービスで使われる。
+- Django より軽量。(Django は学習済み)
+- 毎日「完成」が実現しやすい。
+  <br>
 
 <br><br>
-
 
 # Flask 30日チャレンジリスト
 
@@ -101,7 +92,6 @@ Flask30Days/
 30. **「30日アプリまとめ」サイト（全作品のリンク集）**
 31. ポモドーロタイマーのアプリ
 
-
 <br><br>
 
 # アプリごとのまとめ
@@ -110,7 +100,6 @@ Flask30Days/
 
 画面更新するとランダムに結果を表示。 <br>
 使用技術：Flask（ルーティング / テンプレート）, HTML, CSS, randomモジュール
-
 
 <img width="800" alt="スクリーンショット 2025-08-30 13 04 24" src="https://github.com/user-attachments/assets/73ab4c38-496c-4526-9b84-946299830300" />
 
@@ -123,7 +112,6 @@ Flask30Days/
 
 <img width="800" alt="スクリーンショット 2025-08-30 15 20 22" src="https://github.com/user-attachments/assets/08096e11-f73f-49f3-b59f-d4de81f1f5a0" />
 
-
 ---
 
 ### Day03 - ランダム名言表示
@@ -133,9 +121,7 @@ Flask30Days/
 
 <img width="800" alt="スクリーンショット 2025-08-31 16 16 40" src="https://github.com/user-attachments/assets/efa84954-73aa-4c0e-9138-a96bf5e1a124" />
 
-
 <img width="800" alt="スクリーンショット 2025-08-31 16 18 03" src="https://github.com/user-attachments/assets/c8f48adc-249b-4677-b194-e106d99e13c5" />
-
 
 ---
 
@@ -145,7 +131,6 @@ Flask30Days/
 使用技術：Flask（ルーティング / セッション管理 / 環境変数）, HTML <br>
 学習のポイント：「リクエストが終わったら情報が消える」Flaskの基本性質を理解する。状態を維持するにはセッションが必要。環境変数を扱い、セキュリティを意識。
 
-
 ---
 
 ### Day05 - 計算機アプリ
@@ -153,10 +138,9 @@ Flask30Days/
 四則演算（+ - × ÷）に対応。ゼロで割り算した場合に徐算エラーを表示。 <br>
 使用技術：Flask（フォーム送信処理）, HTML, CSS, JavaScript（非同期通信）
 学習のポイント：
+
 - ウェブフォームから送信されたデータをPythonのFlaskで受け取り、演算処理を行った結果を表示する。
 - 非同期通信（JavaScriptのfetch）を導入し、ページ全体をリロードせずに計算結果を動的に更新できる点を学ぶ。
-
-
 
 ---
 
@@ -166,7 +150,6 @@ Flask30Days/
 使用技術：Flask（フォームデータ受け取り）, HTML, CSS
 学習のポイント：Flaskでフォームからデータを受け取って処理し、結果を返す最小のサイクルを学ぶ。文字列の反転 [::-1] の使い方。これまでのコードを使い組み立てる。
 
-
 ---
 
 ### Day07 - 現在時刻表示
@@ -174,6 +157,7 @@ Flask30Days/
 アクセス時点のサーバー時刻を表示。 <br>
 使用技術：Flask（ルーティング）, datetimeモジュール, HTML, CSS
 学習のポイント：
+
 - datetime モジュールを使って「現在時刻」を取得する。
 - Moment.js＋JavaScriptでリアルタイム更新や柔軟な表示制御
 - pytz（Pythonでタイムゾーンを扱うためのライブラリ）を使って、世界中のタイムゾーン情報を取得
@@ -185,10 +169,10 @@ Flask30Days/
 画像をアップロードしてブラウザに表示。 <br>
 使用技術：Flask, HTML, werkzeug（セキュリティ付きファイル保存）
 学習のポイント：
-* Flaskでファイルアップロード処理（request.files, redirect, flash）の流れを学ぶ
-* werkzeugの`secure_filename`で安全にファイル名を処理する方法を理解する
-* staticフォルダに保存し、URLから画像を取得・表示する仕組みを実装する
 
+- Flaskでファイルアップロード処理（request.files, redirect, flash）の流れを学ぶ
+- werkzeugの`secure_filename`で安全にファイル名を処理する方法を理解する
+- staticフォルダに保存し、URLから画像を取得・表示する仕組みを実装する
 
 ---
 
@@ -197,9 +181,9 @@ Flask30Days/
 固定データをJSON形式で返すAPI。 <br>
 使用技術：Flask（`jsonify` / APIエンドポイント作成 / Response）, jsonモジュール, timeモジュール
 学習のポイント：
-* **エンドポイント**を作り、APIサーバーとしての構成を体験する。
-* `jsonify` と `json.dumps(..., ensure_ascii=False)` を使い分けてJSONレスポンスを返す方法を理解する。
 
+- **エンドポイント**を作り、APIサーバーとしての構成を体験する。
+- `jsonify` と `json.dumps(..., ensure_ascii=False)` を使い分けてJSONレスポンスを返す方法を理解する。
 
 ---
 
@@ -208,9 +192,9 @@ Flask30Days/
 入力したMarkdownをHTMLに変換して表示。 <br>
 使用技術：Flask（フォーム送信処理）, markdownライブラリ, HTML, Jinja2（`safe` フィルタ）
 学習のポイント：
-* **外部ライブラリ（markdown）** を使い、文字列を別の形式（Markdown→HTML）に変換する方法を学ぶ。
-* **テンプレートでの表示制御**（エスケープと `safe` フィルタ）を理解し、変換後のHTMLをそのまま表示する仕組みを学ぶ。
 
+- **外部ライブラリ（markdown）** を使い、文字列を別の形式（Markdown→HTML）に変換する方法を学ぶ。
+- **テンプレートでの表示制御**（エスケープと `safe` フィルタ）を理解し、変換後のHTMLをそのまま表示する仕組みを学ぶ。
 
 ---
 
@@ -220,31 +204,45 @@ OpenWeather APIを利用して都市の天気を取得。 JSON形式で返す。
 使用技術：Flask, requests（外部API通信）, JSON, dotenv（環境変数管理）
 学習のポイント：
 
-* `.env` にAPIキーを保存し、環境変数として安全に読み込む。
-* 外部API（OpenWeatherMap）を呼び出し、取得したJSONデータを加工して返す方法を学ぶ。
-* 日本語やエラーハンドリングに対応したAPIレスポンスの返し方を学ぶ。
-
+- `.env` にAPIキーを保存し、環境変数として安全に読み込む。
+- 外部API（OpenWeatherMap）を呼び出し、取得したJSONデータを加工して返す方法を学ぶ。
+- 日本語やエラーハンドリングに対応したAPIレスポンスの返し方を学ぶ。
 
 ---
 
 ### Day12 - 為替レート換算
 
-外部APIで為替レートを取得し換算。 <br>
-使用技術：Flask（外部API利用）, requestsライブラリ, HTML
+外部APIで為替レートを取得し換算。入力した金額と通貨を指定すると、日本円に換算して結果を表示する。 <br>
+使用技術：Flask（外部API利用、フォーム送信処理）, requests（API取得）, HTML, CSS
+学習のポイント:
+
+- 外部 API(ExchangeRate API) から JSON データを取得し、Python 辞書として扱う
+- フォーム入力を処理して動的に計算結果を返し、テンプレートで表示する仕組みを理解する
+- Jinja2 のループや条件分岐を使い、選択状態の保持やデータの一覧表示を制御する
 
 ---
 
 ### Day13 - ニュース一覧表示
 
-NewsAPIから最新ニュースを取得。 <br>
-使用技術：Flask（外部API利用）, requestsライブラリ, HTML, CSS
+NewsAPIから最新ニュースを取得。キーワードで英語ニュースを取得し、必要なら日本語に翻訳して表示する。 <br>
+使用技術：Flask（フォーム送信処理）, requestsライブラリ, NewsAPI公式ライブラリ, googletrans, HTML, CSS
+学習のポイント：
+
+- 外部API（NewsAPI）を公式ライブラリ経由で利用し、記事データを取得する方法を学ぶ。
+- 翻訳ライブラリ（googletrans）を使って取得データを加工し、多言語対応する仕組みを理解する。
+- Flaskでフォーム入力・条件分岐・テンプレート表示（検索結果・翻訳有無）を組み合わせたアプリ構築を学ぶ。
 
 ---
 
 ### Day14 - GitHubユーザー情報表示
 
-ユーザー名からGitHub APIを呼び出し、プロフィールを表示。 <br>
-使用技術：Flask（外部API利用）, requestsライブラリ, HTML
+GitHubユーザー名からAPIを呼び出し、プロフィール情報とリポジトリ一覧を表示。 <br>
+使用技術：Flask（外部API利用）, requestsライブラリ, HTML, Jinja2（条件分岐・ループ）
+学習のポイント：
+
+- 外部API（GitHub API）の呼び出しと、取得データ（JSON）の処理方法を学ぶ。
+- Pythonの辞書・リストを加工し、テンプレートに渡して表示制御（画像・リスト・通常テキスト）を学ぶ。
+- 条件分岐やループを使い、データの種類ごとに表示形式を変える仕組みを理解する。
 
 ---
 
@@ -257,22 +255,37 @@ Google Books APIを利用して書籍情報を表示。 <br>
 
 ### Day16 - TODOアプリ（SQLite保存）
 
-SQLiteを利用しタスクを保存。 <br>
-使用技術：Flask（SQLAlchemy / DB接続）, SQLite, HTML, CSS
+Todo アプリを作成し、タスクを追加・更新・削除できる機能を実装。 <br>
+使用技術：Flask（ルーティング／フォーム処理）, SQLAlchemy（ORM）, SQLite, HTML, CSS（Semantic UI）
+学習のポイント：
+
+- SQLAlchemy を使い、Python のクラス（モデル）とデータベース（SQLite）を連携させる方法を学ぶ。
+- CRUD 処理（作成・参照・更新・削除）の基本的な実装フローを理解できる。
+- テンプレート（Jinja2）を用いて、DB のデータをループ表示し、UI で状態を切り替える方法を学ぶ。
 
 ---
 
 ### Day17 - 掲示板アプリ
 
-投稿内容をDBに保存して表示。 <br>
-使用技術：Flask（SQLAlchemy / DB操作）, SQLite, HTML, CSS
+投稿を作成・一覧表示・編集・削除できるシンプルなブログアプリ。<br>
+使用技術：Flask（ルーティング・テンプレート）, SQLAlchemy（ORM）, Flask-Migrate（DBマイグレーション）, Flask-Login（ログイン管理）, PostgreSQL, HTML
+学習のポイント：
+
+- **SQLAlchemyによるDB操作** ― モデル定義・保存・更新・削除といった基本的なORMの使い方を学ぶ。
+- **CRUD処理の実装** ― 投稿の新規作成(Create)、一覧表示(Read)、更新(Update)、削除(Delete)をルーティングで実現する流れを理解する。
+- **画像アップロードと表示** ― `request.files` を使ってファイルを保存し、テンプレートで表示する方法を学ぶ。
 
 ---
 
 ### Day18 - URL短縮サービス
 
-入力されたURLを短縮し保存。 <br>
-使用技術：Flask（ルーティング / DB操作）, SQLite, HTML
+入力したURLを短縮して保存し、短縮URLから元のページにリダイレクトできる。さらに統計情報（クリック数など）も表示する。 <br>
+使用技術：Flask（ルーティング・フォーム処理・テンプレート）, SQLite（DB操作）, Hashids（IDを短縮文字列に変換）, HTML, CSS
+学習のポイント：
+
+- **FlaskとSQLiteの連携** ― フォームから受け取ったデータをDBに保存・取得し、ルーティングで処理する方法を学ぶ。
+- **Hashidsの利用** ― データベースのIDを安全な短縮文字列に変換して、推測されにくい短縮URLを生成する方法を学ぶ。
+- **リダイレクトと統計表示** ― 短縮URLから元のURLへリダイレクトする仕組みと、クリック数や作成日を統計ページで表示する方法を理解する。
 
 ---
 
@@ -364,5 +377,3 @@ CSVファイルを読み込み、テーブル表示。 <br>
 
 作業効率化用のタイマーアプリ。 <br>
 使用技術：Flask（ルーティング）, HTML, CSS, JavaScript（タイマー処理）
-
-
