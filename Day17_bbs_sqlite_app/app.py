@@ -32,6 +32,13 @@ migrate = Migrate(app, db) # Migrateのインスタンスを作成
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+# アップロードを許可する拡張子のリスト
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+    filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 # user 識別のため必須
 @login_manager.user_loader
 def load_user(user_id):
@@ -66,6 +73,10 @@ def create():
     elif request.method == 'POST':
         file = request.files['img'] # ファイルを取得
         filename = file.filename # ファイル名を取得
+
+        if not allowed_file(filename):
+            return '許可されていないファイル形式です。', 400
+        
         img_name = os.path.join(app.static_folder, 'img', filename) # パスを作成
         file.save(img_name) # 保存
 
