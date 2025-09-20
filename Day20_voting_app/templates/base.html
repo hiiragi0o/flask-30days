@@ -9,7 +9,36 @@
             rel="stylesheet"
         />
     </head>
-    <body class="container mt-5">
-        {% block content %}{% endblock %}
+    <body>
+        <!-- ナビゲーションバー -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">投票フォーム</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/result">投票結果</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin">管理ページ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-4">{% block content %}{% endblock %}</div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
