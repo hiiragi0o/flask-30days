@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}投票フォーム{% endblock %}
+
+{% block content %}
+    <h1>投票結果</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>選択肢</th>
+                <th>票数</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for choice,count in results %}
+                <tr>
+                    <td>{{ choice }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/">戻る</a>
+{% endblock %}

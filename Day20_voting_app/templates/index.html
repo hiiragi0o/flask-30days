@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}投票フォーム{% endblock %}
+
+{% block content %}
+    <h1>投票してください</h1>
+    <form method="POST" action="/vote">
+        <label for="form-label">選択肢：</label>
+        <select name="choice" class="form-label">
+            <option value="A">選択肢 A</option>
+            <option value="B">選択肢 B</option>
+            <option value="C">選択肢 C</option>
+        </select>
+        <button>投票</button>
+    </form>
+{% endblock %}
