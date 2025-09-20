@@ -13,7 +13,7 @@
     "singleQuote": false,
     "trailingComma": "es5",
     "semi": true,
-    "printWidth": 80,
+    "printWidth": 150,
     "bracketSpacing": true,
     "jsxBracketSameLine": false,
     "arrowParens": "avoid",
