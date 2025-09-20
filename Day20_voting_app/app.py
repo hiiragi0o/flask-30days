@@ -86,6 +86,37 @@ def admin():
     conn.close()
     return render_template('admin.html', choices=choices)
 
+# 選択肢を編集するルート
+@app.route('/admin/edit/<int:choice_id>', methods=['GET', 'POST'])
+def edit_choice(choice_id):
+    conn = sqlite3.connect('votes.db')
+    c = conn.cursor()
+
+    if request.method == 'POST':
+        new_name = request.form.get('new_name')
+        if new_name:
+            c.execute('UPDATE choices SET name = ? WHERE id = ?', (new_name, choice_id))
+            conn.commit()
+            conn.close()
+            return redirect('/admin')
+
+    # GETリクエストの場合は編集フォームを表示
+    c.execute('SELECT name FROM choices WHERE id = ?', (choice_id,))
+    # fetchall() を使わず、 fetchone() → [0] で中身の文字だけ取り出す
+    choice = c.fetchone()
+    conn.close()
+    return render_template('edit_choice.html', choice_id=choice_id, choice_name=choice[0])
+
+# 選択肢を削除するルート
+@app.route('/admin/delete/<int:choice_id>', methods=['POST'])
+def delete_choice(choice_id):
+    conn = sqlite3.connect('votes.db')
+    c = conn.cursor()
+    c.execute('DELETE FROM choices WHERE id = ?', (choice_id,))
+    conn.commit()
+    conn.close()
+    return redirect('/admin')
+
 if __name__ == '__main__':
     init_db() # テーブル作成
     app.run(debug=True)
