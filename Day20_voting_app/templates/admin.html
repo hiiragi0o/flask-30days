@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}管理者ページ{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">選択肢管理</h1>
+    <form method="POST" class="mb-3">
+        <div class="input-group">
+            <input
+                type="text"
+                name="new_choice"
+                class="form-control"
+                placeholder="新しい選択肢"
+            />
+            <button type="submit" class="btn btn-success">追加</button>
+        </div>
+    </form>
+
+    <h3>現在の選択肢</h3>
+    <ul class="list-group">
+        {% for id, name in choices %}
+            <li class="list-group-item">{{ name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

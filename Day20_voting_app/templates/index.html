@@ -4,13 +4,18 @@
 
 {% block content %}
     <h1 class="mb-4">投票してください</h1>
+    <h3 class="text-primary fw-bold border-bottom pb-2 mb-4">
+        🍙 テーマ：おにぎりの具といえば？
+    </h3>
     <form method="POST" action="/vote">
-        <label for="form-label">選択肢：</label>
-        <select name="choice" class="form-label">
-            <option value="A">選択肢 A</option>
-            <option value="B">選択肢 B</option>
-            <option value="C">選択肢 C</option>
-        </select>
+        <div class="mb-3">
+            <label for="form-label">選択肢：</label>
+            <select name="choice_id" class="form-select">
+                {% for id, name in choices %}
+                    <option value="{{ id }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">投票</button>
     </form>
 {% endblock %}
