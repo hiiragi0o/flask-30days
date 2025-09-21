@@ -13,7 +13,7 @@ def index():
 @app.route('/qrcode', methods=['GET'])
 def get_qrcode():
     # /qrcode?data=<qrcode_data> を取得
-    data = request.args.get('data', "")
+    data = request.args.get('data', '')
     # 生成したQRコードのデータをPNG画像としてユーザーのブラウザに送り返す
     return send_file(qrcode(data, mode='raw'), mimetype='image/png')
 
