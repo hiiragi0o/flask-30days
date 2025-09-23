@@ -1,12 +1,19 @@
 # 最小限の「画像を指定サイズに変換して表示」機能
 import io
-from flask import Flask, render_template, request, send_file
+import os
+from flask import Flask, render_template, request, send_file, url_for
 from PIL import Image, ImageFilter
 
 app = Flask(__name__)
 
+# 保存先のフォルダ
+UPLOAD_FOLDER = 'static/uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    processed_image_url = None
+
     if request.method == 'POST':
         # ファイルの存在をチェック
         file = request.files['image']
@@ -40,22 +47,15 @@ def index():
             img = img.rotate(90) # 90度回転
         elif action == 'flip':
             img = img.transpose(Image.FLIP_LEFT_RIGHT) # 左右反転
-        elif action == 'format_convert':
-            # JPEG に変換して保存する例（品質85）
-            img_io = io.BytesIO()
-            img = img.convert('RGB') # JPEG はRGB必須
-            img.save(img_io, format='JPEG', quality=85) # 形式を指定して保存
-            img_io.seek(0)
-            return send_file(img_io, mimetype='image/jpeg')
-        
 
-        # それ以外はPNGで返す
-        img_io = io.BytesIO()
-        img.save(img_io, format='PNG')
-        img_io.seek(0)
-        return send_file(img_io, mimetype='image/png')
+        # 保存先パス
+        save_path = os.path.join(UPLOAD_FOLDER, 'result.png')
+        img.save(save_path)
+
+        # ブラウザに渡すURL
+        processed_image_url = url_for('static', filename='uploads/result.png')
     
-    return render_template('index.html')
+    return render_template('index.html', img_url=processed_image_url)
 
 if __name__ == '__main__':
     app.run(debug=True)

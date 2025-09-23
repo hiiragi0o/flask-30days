@@ -13,7 +13,6 @@
                 <input type="file" name="image" required><br>
                 幅： <input type="number" name="width" value="200"><br>
                 高さ： <input type="number" name="height" value="200"><br>
-                <button type="submit">送信</button>
                 処理：
                 <select name="action">
                     <option value="resize">リサイズ</option>
@@ -22,9 +21,14 @@
                     <option value="sharpen">シャープ化</option>
                     <option value="rotate">回転(90度)</option>
                     <option value="flip">左右反転</option>
-                    <option value="format_convert">JPEG変換</option>
                 </select><br><br>
+                <button type="submit">送信</button>
             </form>
+
+            {% if img_url %}
+                <h2>処理の結果</h2>
+                <img src="{{ img_url }}" alt="処理済み画像">
+            {% endif %}
 
     <body>
         
