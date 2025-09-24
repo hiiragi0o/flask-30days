@@ -29,5 +29,16 @@
             文字数： {{ count }}
         {% endif %}
 
+        <p>現在の文字数： <span id="charCount">0</span></p>
+
+        <script>
+            const textarea = document.getElementById("text_to_count");
+            const charCount = document.getElementById("charCount");
+
+            textarea.addEventListener("input", () => {
+                charCount.textContent = textarea.value.length;
+            });
+        </script>
+
     </body>
 </html>
