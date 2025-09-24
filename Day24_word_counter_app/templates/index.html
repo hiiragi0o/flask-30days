@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Word Counter</title>
+    </head>
+
+    <body>
+
+        <h1>文字数カウントアプリ</h1>
+
+        <form method="POST" action="/">
+            <label for="text_to_count">文字を入力してください</label>
+            <textarea name="text" rows="5" cols="40" id="text_to_count"></textarea>
+
+            <button type="submit">カウントする</button>
+        </form>
+
+        {% if count is not none %}
+            文字数： {{ count }}
+        {% endif %}
+
+    </body>
+</html>
