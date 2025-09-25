@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Regex Checker</title>
+    </head>
+
+    <body>
+        <h1>正規表現チェッカー</h1>
+
+        <form method="POST" action="/">
+            <label for="pattern">正規表現パターン:</label>
+            <input type="text" name="pattern" id="pattern"><br><br>
+
+            <label for="text">テスト文字列:</label>
+            <textarea name="text" id="text"></textarea><br><br>
+
+            <button type="submit">チェック</button>
+        </form>
+
+        {% if result %}
+            <h2>結果</h2>
+            <p>{{ result }}</p>
+        {% endif %}
+
+    </body>
+
+</html>
