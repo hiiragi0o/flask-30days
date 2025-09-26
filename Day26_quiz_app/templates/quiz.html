@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz</title>
+    </head>
+
+    <body>
+        <!-- 問題番号の表示 -->
+        <h1>クイズ {{ question_index + 1 }} / {{ total }}</h1>
+
+        <p>問題： {{ quiz.question }}</p>
+
+        {% if not answerd %}
+            <!-- 回答がなければフォームを表示 -->
+            <form method="POST">
+                {% for choice in quiz.choices %}
+                    <label>
+                        <input type="radio" name="choice" value="{{ choice }}" required>
+                        {{ choice }}
+                    </label><br>
+                {% endfor %}
+                <button type="submit">回答する</button>
+            </form>
+        {% else %}
+            <!-- 回答済み：結果を表示して、ユーザーが次へ進む -->
+            <p><strong>{{ result }}</strong></p>
+            {% if question_index + 1 < total %}
+                <a href="{{ url_for('quiz', question_index=question_index + 1) }}">次の問題へ</a>
+            {% else %}
+                <p>全問終了です。お疲れさまでした！</p>
+            {% endif %}
+    
+        {% endif %}
+    </body>
+
+</html>
