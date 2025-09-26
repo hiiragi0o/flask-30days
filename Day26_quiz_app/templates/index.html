@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz</title>
+    </head>
+
+    <body>
+        <h1>クイズアプリ</h1>
+
+        <p>問題： {{ quiz.question }}</p>
+
+        <form method="POST">
+            {% for choice in quiz.choices %}
+                <label>
+                    <input type="radio" name="choice" value="{{ choice }}">
+                    {{ choice }}
+                </label><br>
+            {% endfor %}
+            <button type="submit">回答する</button>
+        </form>
+
+        {% if result %}
+            <p>{{ result }}</p>
+        {% endif %}
+
+    </body>
+
+</html>
