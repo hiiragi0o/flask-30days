@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Janken{% endblock %}
+
+{% block content %}
+        <h1>じゃんけんアプリ✊✌️✋</h1>
+
+        <p>出す手を選んでください</p>
+        <button onclick="play('Rock')">グー</button>
+        <button onclick="play('Scissors')">チョキ</button>
+        <button onclick="play('Paper')">パー</button>
+
+        <p id="result"></p>
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>        
+{% endblock %}
