@@ -11,22 +11,11 @@
     <body>
         <h1>クイズアプリ</h1>
 
-        <p>問題： {{ quiz.question }}</p>
+        <p>クイズに挑戦してみよう！</p>
 
-        <form method="POST">
-            {% for choice in quiz.choices %}
-                <label>
-                    <input type="radio" name="choice" value="{{ choice }}">
-                    {{ choice }}
-                </label><br>
-            {% endfor %}
-            <button type="submit">回答する</button>
-        </form>
-
-        {% if result %}
-            <p>{{ result }}</p>
-        {% endif %}
-
+        <a href="{{ url_for('quiz', question_id=1) }}">
+            <button>クイズを開始</button>
+        </a>
     </body>
 
 </html>

@@ -40,12 +40,10 @@ with app.app_context():
         db.session.add_all([q1, q2, q3])
         db.session.commit()
 
-
+# スタート画面
 @app.route('/')
 def index():
-    # 最初の問題（id=1）にリダイレクト
-    first_quiz = Quiz.query.order_by(Quiz.id).first()
-    return redirect(url_for('quiz', question_id=first_quiz.id))
+    return render_template('index.html')
 
 @app.route('/quiz/<int:question_id>', methods=['GET', 'POST'])
 def quiz(question_id): # 引数
