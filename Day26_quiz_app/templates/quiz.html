@@ -10,14 +10,14 @@
 
     <body>
         <!-- 問題番号の表示 -->
-        <h1>クイズ {{ question_index + 1 }} / {{ total }}</h1>
+        <h1>クイズ {{ quiz_id }}</h1>
 
         <p>問題： {{ quiz.question }}</p>
 
         {% if not answerd %}
             <!-- 回答がなければフォームを表示 -->
             <form method="POST">
-                {% for choice in quiz.choices %}
+                {% for choice in [quiz.choice1, quiz.choice2, quiz.choice3, quiz.choice4] %}
                     <label>
                         <input type="radio" name="choice" value="{{ choice }}" required>
                         {{ choice }}
@@ -28,10 +28,12 @@
         {% else %}
             <!-- 回答済み：結果を表示して、ユーザーが次へ進む -->
             <p><strong>{{ result }}</strong></p>
-            {% if question_index + 1 < total %}
-                <a href="{{ url_for('quiz', question_index=question_index + 1) }}">次の問題へ</a>
+            
+            {% if next_id %}
+                <a href="{{ url_for('quiz', question_id=next_id) }}">次の問題へ</a>
             {% else %}
                 <p>全問終了です。お疲れさまでした！</p>
+                <a href="{{ url_for('index') }}">トップページに戻る</a>
             {% endif %}
     
         {% endif %}

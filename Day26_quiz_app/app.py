@@ -1,66 +1,86 @@
 from flask import Flask, redirect, render_template, request, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quizzes.db' # SQLite DBの場所
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# 問題
-quizzes = [
-    {
-    'question': 'Pythonのファイル拡張子は？',
-    'choices': ['py', 'js', 'html', 'css'],
-    'answer': 'py'
-    },
-    {
-    'question': 'HTMLの見出しタグは？',
-    'choices': ['<p>', '<h1>', '<div>', '<title>'],
-    'answer': '<h1>'
-    },
-    {
-    'question': 'Flaskは何のフレームワーク？',
-    'choices': ['Web', 'AI', 'ゲーム', '画像処理'],
-    'answer': 'Web'
-    }
-]
+db = SQLAlchemy(app)
+
+class Quiz(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.String(200), nullable=False)
+    choice1 = db.Column(db.String(100), nullable=False)
+    choice2 = db.Column(db.String(100), nullable=False)
+    choice3 = db.Column(db.String(100), nullable=False)
+    choice4 = db.Column(db.String(100), nullable=False)
+    answer = db.Column(db.String(100), nullable=False)
+
+# 初回だけDBを作る処理
+with app.app_context():
+    db.create_all() # テーブル作成
+
+    # 初期データがなければ追加
+    if Quiz.query.count() == 0:
+        q1 = Quiz(
+            question='Pythonのファイル拡張子は？',
+            choice1='py', choice2='js', choice3='html', choice4='css',
+            answer='py'
+        )
+        q2 = Quiz(
+            question='HTMLの見出しタグは？',
+            choice1='<p>', choice2='<h1>', choice3='<div>', choice4='<title>',
+            answer='<h1>'
+        )
+        q3 = Quiz(
+            question='Flaskは何のフレームワーク？',
+            choice1='Web', choice2='AI', choice3='ゲーム', choice4='画像処理',
+            answer='Web'
+        )
+        db.session.add_all([q1, q2, q3])
+        db.session.commit()
+
 
 @app.route('/')
 def index():
-    # 最初の問題（0番目）にリダイレクト
-    return redirect(url_for('quiz', question_index=0))
+    # 最初の問題（id=1）にリダイレクト
+    first_quiz = Quiz.query.order_by(Quiz.id).first()
+    return redirect(url_for('quiz', question_id=first_quiz.id))
 
-@app.route('/<int:question_index>', methods=['GET', 'POST'])
-def quiz(question_index): # 引数
-    if question_index >= len(quizzes):
-        return 'クイズ終了！お疲れさまでした。'
-    
-    quiz = quizzes[question_index]
+@app.route('/quiz/<int:question_id>', methods=['GET', 'POST'])
+def quiz(question_id): # 引数
+    quiz = Quiz.query.get_or_404(question_id) # 現在の問題をDBから取得
     result = None
     answerd = False
 
+    # 次の問題を取得（ID順で次）を計算
+    next_quiz = Quiz.query.filter(Quiz.id > quiz.id).order_by(Quiz.id).first()
+    next_id = next_quiz.id if next_quiz else None # 次がなければNone
+
     if request.method == 'POST':
         selected = request.form.get('choice')
-        if selected == quiz['answer']:
+        if selected == quiz.answer:
             result =  f"正解です！"
         else:
             # f-stringを使用して変数の値を埋め込む
-            result =  f"不正解です。正しい回答は {quiz['answer']} です"
+            result =  f"不正解です。正しい回答は {quiz.answer} です"
         
         answerd = True # 回答済みにする
 
         return render_template(
             'quiz.html',
             quiz=quiz,
-            question_index=question_index,
             result=result,
             answerd=answerd,
-            total=len(quizzes)
+            next_id=next_id,
+            next_quiz=next_quiz
         )
 
     # GET時
     return render_template(
         'quiz.html', 
         quiz=quiz, 
-        question_index=question_index,
-        answerd=answerd,
-        total=len(quizzes)
+        answerd=answerd
     )
 
 if __name__ == '__main__':
