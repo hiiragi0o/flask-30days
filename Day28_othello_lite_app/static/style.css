@@ -1,0 +1,28 @@
+/* オセロ盤の枠を作る */
+#board {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+    gap: 2px;
+    width: max-content;
+    margin: 20px auto;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    background: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.stone {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.black { background: black; }
+.white { background: white; border: 1px solid #000; }
