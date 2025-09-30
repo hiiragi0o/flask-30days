@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let timer;              // setInterval の ID を格納
     let isRunning = false;  // 動作中かどうか
     let timeLeft = 25 * 60; // 残り時間（秒） 25分 = 1500秒
+    let sessionCount = 0;   // 作業回数
+    let mode = "work";      // "work" または "break"
 
     const timerDisplay = document.getElementById("timer")
     const statusDisplay = document.getElementById("status")
@@ -31,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     clearInterval(timer);
                     isRunning = false;
-                    statusDisplay.textContent = "終了！";
+                    switchMode(); // 0になったら次のモードに切り替え
                 }
             }, 1000);
         }
@@ -47,12 +49,38 @@ document.addEventListener("DOMContentLoaded", () => {
     function resetTimer() {
         clearInterval(timer);
         isRunning = false;
+        sessionCount = 0;
+        mode = "work";
         timeLeft = 25 * 60; // 初期値に戻す
         updateDisplay();
         statusDisplay.textContent = "作業時間";
     }
 
-    // イベント登録
+    // モード切替
+    function switchMode() {
+        if (mode === "work") {
+            sessionCount++;
+            if (sessionCount % 4 === 0) {
+                // 長い休憩
+                mode = "break";
+                timeLeft = 15 * 60;
+                statusDisplay.textContent = "長い休憩";
+            } else {
+                // 短い休憩
+                mode = "break";
+                timeLeft = 5 * 60;
+                statusDisplay.textContent = "休憩"
+            }
+        } else {
+            // 休憩 → 作業
+            mode = "work";
+            timeLeft = 25 * 60;
+            statusDisplay.textContent = "作業時間";
+        }
+        updateDisplay();
+    }
+
+    // ボタン処理
     startBtn.addEventListener("click", startTimer);
     pauseBtn.addEventListener("click", pauseTimer);
     resetBtn.addEventListener("click", resetTimer);
