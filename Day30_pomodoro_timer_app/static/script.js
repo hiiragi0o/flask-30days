@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const pauseBtn = document.getElementById("pause")
     const resetBtn = document.getElementById("reset")
 
+    // アラーム音を読み込み
+    const alarmSound = new Audio("/static/春の山.mp3");
+
     // 残り時間を "MM:SS" 形式に変換
     function updateDisplay() {
         let minuts = Math.floor(timeLeft / 60);
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     clearInterval(timer);
                     isRunning = false;
+                    alarmSound.play(); // 終了時に音を鳴らす
                     switchMode(); // 0になったら次のモードに切り替え
                 }
             }, 1000);
@@ -43,6 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function pauseTimer() {
         clearInterval(timer);
         isRunning = false;
+        // 再生中のアラームを止める
+        alarmSound.pause();
+        alarmSound.currentTime = 0;
     }
 
     // リセット
@@ -54,6 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
         timeLeft = 25 * 60; // 初期値に戻す
         updateDisplay();
         statusDisplay.textContent = "作業時間";
+        // 再生中のアラームを止める
+        alarmSound.pause();
+        alarmSound.currentTime = 0;
     }
 
     // モード切替
