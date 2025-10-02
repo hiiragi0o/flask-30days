@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let sessionCount = 0;   // 作業回数
     let mode = "work";      // "work" または "break"
 
-    const timerDisplay = document.getElementById("timer")
-    const statusDisplay = document.getElementById("status")
+    const timerDisplay = document.getElementById("timer");
+    const statusDisplay = document.getElementById("status");
 
-    const startBtn = document.getElementById("start")
-    const pauseBtn = document.getElementById("pause")
-    const resetBtn = document.getElementById("reset")
+    const startBtn = document.getElementById("start");
+    const pauseBtn = document.getElementById("pause");
+    const resetBtn = document.getElementById("reset");
 
     const historyList = document.getElementById("history");
 
@@ -56,21 +56,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     clearInterval(timer);
                     isRunning = false;
+
                     alarmSound.play(); // 終了時に音を鳴らす
 
-                    // カウントダウン終了時
-                    if (timeLeft === 0) {
-                        clearInterval(timer);
-                        isRunning = false;
-                        alarmSound.play();
-
-                        // 今のモードを履歴に記録
-                        if (mode === "work") {
-                            addHistoryEntry("作業");
-                        } else {
-                            addHistoryEntry("休憩");
-                        }
+                    // 今のモードを履歴に記録
+                    if (mode === "work") {
+                        addHistoryEntry("作業");
+                        sessionCount++; // 作業が完了した時点でカウントアップ
+                    } else {
+                        addHistoryEntry("休憩");
                     }
+                    // }
 
                     switchMode(); // 0になったら次のモードに切り替え
                 }
@@ -104,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // モード切替
     function switchMode() {
         if (mode === "work") {
-            sessionCount++;
             if (sessionCount % 4 === 0) {
                 // 長い休憩（4回作業するごとに）
                 mode = "break";
@@ -114,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // 短い休憩
                 mode = "break";
                 timeLeft = SHORT_BREAK;
-                statusDisplay.textContent = "休憩"
+                statusDisplay.textContent = "休憩";
             }
         } else {
             // 休憩 → 作業
