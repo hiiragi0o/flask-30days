@@ -53,3 +53,30 @@ button:hover {
     margin-top: 20px;
     font-size: 1.5rem;
 }
+
+.history-container {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.history-container h3 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+#history {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 0.9em;
+}
+
+#history li {
+    padding: 4px 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
