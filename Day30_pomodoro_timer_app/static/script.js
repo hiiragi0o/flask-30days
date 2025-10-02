@@ -2,9 +2,17 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Pomodoro Timer Loaded!");
 
+    // ===== テスト用フラグ =====
+    const TEST_MODE = true; // ← false にすると本番時間に戻る
+
+    // 作業時間・休憩時間を設定　テストモード：本番
+    const WORK_TIME     = TEST_MODE ? 5 : 25 * 60;   // 5秒 or 25分
+    const SHORT_BREAK   = TEST_MODE ? 3 : 5 * 60;    // 3秒 or 5分
+    const LONG_BREAK    = TEST_MODE ? 6 : 5 * 60;    // 6秒 or 15分
+
     let timer;              // setInterval の ID を格納
     let isRunning = false;  // 動作中かどうか
-    let timeLeft = 25 * 60; // 残り時間（秒） 25分 = 1500秒
+    let timeLeft = WORK_TIME; // 残り時間（秒） 25分 = 1500秒
     let sessionCount = 0;   // 作業回数
     let mode = "work";      // "work" または "break"
 
@@ -58,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isRunning = false;
         sessionCount = 0;
         mode = "work";
-        timeLeft = 25 * 60; // 初期値に戻す
+        timeLeft = WORK_TIME; // 初期値に戻す
         updateDisplay();
         statusDisplay.textContent = "作業時間";
         // 再生中のアラームを止める
@@ -71,20 +79,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mode === "work") {
             sessionCount++;
             if (sessionCount % 4 === 0) {
-                // 長い休憩
+                // 長い休憩（4回作業するごとに）
                 mode = "break";
-                timeLeft = 15 * 60;
+                timeLeft = LONG_BREAK;
                 statusDisplay.textContent = "長い休憩";
             } else {
                 // 短い休憩
                 mode = "break";
-                timeLeft = 5 * 60;
+                timeLeft = SHORT_BREAK;
                 statusDisplay.textContent = "休憩"
             }
         } else {
             // 休憩 → 作業
             mode = "work";
-            timeLeft = 25 * 60;
+            timeLeft = WORK_TIME;
             statusDisplay.textContent = "作業時間";
         }
         updateDisplay();
