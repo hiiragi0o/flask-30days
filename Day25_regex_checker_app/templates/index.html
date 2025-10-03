@@ -12,8 +12,18 @@
         <h1>正規表現チェッカー</h1>
 
         <form method="POST" action="/">
+
+            <!-- パターン入力 -->
             <label for="pattern">正規表現パターン:</label>
             <input type="text" name="pattern" id="pattern"><br><br>
+
+            <!-- フラグ -->
+            <label><input  type="checkbox" name="ignorecase" {% if options.ignorecase %}checked{% endif %}> 大文字小文字を無視</label>
+            <label><input type="checkbox" name="multiline" {% if options.multiline %}checked{% endif %}> 複数行モード</label>
+            <label><input type="checkbox" name="dotall" {% if options.dotall %}checked{% endif %}> ドットが改行にもマッチ</label>
+
+            <!-- プリセット領域 -->
+            <div id="presets"></div>
 
             <label for="text">テスト文字列:</label>
             <textarea name="text" id="text"></textarea><br><br>
