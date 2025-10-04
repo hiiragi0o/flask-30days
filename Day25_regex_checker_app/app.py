@@ -6,6 +6,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     result = None
+    highlighted = None # ハイライト結果を入れる変数
     
     # options を定義
     options = {'ignorecase':False, 'multiline': False, 'dotall':False}
@@ -33,9 +34,23 @@ def index():
         try:
             matches = re.findall(pattern, text, flags=flags) # 正規表現でマッチする部分をすべて抽出
             result = matches if matches else 'マッチなし' # マッチがなければ「マッチなし」と表示
+        
+            # マッチ部分を黄色でハイライトする
+            if matches:
+                highlighted = re.sub(
+                    pattern,
+                    r'<mark>\g<0></mark>',
+                    text,
+                    flags=flags
+                )
+            else:
+                highlighted = text  # マッチしないときはそのまま表示
+
         except re.error as e:
             result = f'正規表現エラー: {e}'
-    return render_template('index.html', result=result, options=options)
+            highlighted = text # エラー時も元のテキストをそのまま表示
+
+    return render_template('index.html', result=result, options=options, highlighted=highlighted)
 
 if __name__ == '__main__':
     app.run(debug=True)

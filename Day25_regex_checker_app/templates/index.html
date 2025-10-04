@@ -33,7 +33,12 @@
 
         {% if result %}
             <h2>結果</h2>
-            <p>{{ result }}</p>
+            <p>マッチ結果: {{ result }}</p>
+
+            <h3>ハイライト表示</h3>
+            <div>
+                {{ highlighted | safe }}
+            </div>
         {% endif %}
 
     </body>
