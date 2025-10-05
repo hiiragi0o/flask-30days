@@ -15,7 +15,7 @@
 
             <!-- パターン入力 -->
             <label for="pattern">正規表現パターン:</label>
-            <input type="text" name="pattern" id="pattern"><br><br>
+            <input type="text" name="pattern" id="pattern" value="{{ pattern }}"><br><br>
 
             <!-- プリセットボタン -->
             <div>
@@ -39,7 +39,7 @@
             <div id="presets"></div>
 
             <label for="text">テスト文字列:</label>
-            <textarea name="text" id="text" rows="10" cols="60"></textarea><br><br>
+            <textarea name="text" id="text" rows="10" cols="60">{{ text }}</textarea><br><br>
 
             <button type="submit">チェック</button>
         </form>

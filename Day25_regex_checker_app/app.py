@@ -7,6 +7,8 @@ app = Flask(__name__)
 def index():
     result = None
     highlighted = None # ハイライト結果を入れる変数
+    pattern = ""    # 初期値を空に設定
+    text = ""       # 初期値を空に設定
     
     # options を定義
     options = {'ignorecase':False, 'multiline': False, 'dotall':False}
@@ -50,7 +52,14 @@ def index():
             result = f'正規表現エラー: {e}'
             highlighted = text # エラー時も元のテキストをそのまま表示
 
-    return render_template('index.html', result=result, options=options, highlighted=highlighted)
+    return render_template(
+        'index.html', 
+        result=result, 
+        options=options, 
+        highlighted=highlighted,
+        pattern=pattern,
+        text=text
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)
