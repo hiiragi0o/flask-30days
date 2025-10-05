@@ -17,16 +17,29 @@
             <label for="pattern">正規表現パターン:</label>
             <input type="text" name="pattern" id="pattern"><br><br>
 
+            <!-- プリセットボタン -->
+            <div>
+                <p>プリセット: </p>
+                <button type="button" onclick="setPattern('[0-9]{3}-[0-9]{4}')">郵便番号</button>
+                <button type="button" onclick="setPattern('[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}')">メールアドレス</button>
+                <button type="button" onclick="setPattern('[0-9]{4}-[0-9]{2}-[0-9]{2}')">日付(YYYY-MM-DD)</button>
+                <button type="button" onclick="setPattern('https?://[^\\s]+')">URL</button>
+            </div>
+
+            <br>
+
             <!-- フラグ -->
-            <label><input  type="checkbox" name="ignorecase" {% if options.ignorecase %}checked{% endif %}> 大文字小文字を無視</label>
+            <label><input type="checkbox" name="ignorecase" {% if options.ignorecase %}checked{% endif %}> 大文字小文字を無視</label>
             <label><input type="checkbox" name="multiline" {% if options.multiline %}checked{% endif %}> 複数行モード</label>
             <label><input type="checkbox" name="dotall" {% if options.dotall %}checked{% endif %}> ドットが改行にもマッチ</label>
+
+            <br><br>
 
             <!-- プリセット領域 -->
             <div id="presets"></div>
 
             <label for="text">テスト文字列:</label>
-            <textarea name="text" id="text"></textarea><br><br>
+            <textarea name="text" id="text" rows="10" cols="60"></textarea><br><br>
 
             <button type="submit">チェック</button>
         </form>
@@ -41,6 +54,11 @@
             </div>
         {% endif %}
 
+        <script>
+            function setPattern(value) {
+                document.getElementById('pattern').value = value;
+            }
+        </script>
     </body>
 
 </html>
