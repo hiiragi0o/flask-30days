@@ -9,29 +9,45 @@
 
     <body>
         <h1>GitHubユーザー情報表示</h1>
-        <div>
-            <p>hiiragi0o のユーザー情報です。</p>
-            {% for name_ja, data in data_display %}
-                {% if name_ja == "アイコン" %}
-                    <!-- アイコンを画像として表示 -->
-                    <p>{{ name_ja }} : <img src="{{ data }}" alt="アイコン" width="100"></p>
 
-                {% elif name_ja == "リポジトリ名" %}
-                    <!-- リポジトリ名のリストをループして表示 -->
-                    <p>{{ name_ja }}:</p>
-                    <ul>
-                        {% for repo in data %}
-                            <li>{{ repo }}</li>
-                        {% endfor %}
-                    </ul>
+        <!-- 検索フォーム -->
+        <form method="POST">
+            <label for="username">ユーザー名を入力:</label>
+            <input type="text" name="username" id="username" placeholder="例: torvalds" required>
+            <button type="submit">検索</button>
+        </form>
 
-                {% else %}
-                <!-- それ以外の項目は通常表示 -->
-                <p>{{ name_ja }} : {{ data }}</p>
-                {% endif %}
-            {% endfor %}
-        </div>
+        {% if error %}
+            <p style="color:red;">{{ error }}</p>
+        {% endif %}
 
+        {% if username %}
+            <h2>{{ username }} のユーザー情報</h2>
+        {% endif %}
+
+        {% if data_display %}
+            <div>
+                {% for name_ja, data in data_display %}
+                    {% if name_ja == "アイコン" %}
+                        <!-- アイコンを画像として表示 -->
+                        <p>{{ name_ja }} : <img src="{{ data }}" alt="アイコン" width="100"></p>
+
+                    {% elif name_ja == "リポジトリ名" %}
+                        <!-- リポジトリ名のリストをループして表示 -->
+                        <p>{{ name_ja }}:</p>
+                        <ul>
+                            {% for repo in data %}
+                                <li>{{ repo }}</li>
+                            {% endfor %}
+                        </ul>
+
+                    {% else %}
+                    <!-- それ以外の項目は通常表示 -->
+                    <p>{{ name_ja }} : {{ data }}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
     </body>
 
 </html>
