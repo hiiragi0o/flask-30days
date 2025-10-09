@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Books Search</title>
+    </head>
+
+    <body>
+        <h1>📚 書籍検索アプリ</h1>
+
+        <!-- 検索フォーム -->
+        <form method="POST">
+            <label for="keyword">キーワード: </label>
+            <input type="text" name="keyword" id="keyword" placeholder="例：ハリー・ポッター">
+            <label for="authors">著者名: </label>
+            <input type="text" name="authors" id="authors" placeholder="例：J.K. ローリング">
+            <button type="submit">検索</button>
+        </form>
+
+        <!-- エラーメッセージ -->
+        {% if error %}
+            <p style="color:red">{{ error }}</p>
+        {% endif %}
+
+        <!-- 検索結果 -->
+        {% if books_info %}
+            <h2>検索結果</h2>
+            <ul>
+                {% for book in books_info %}
+                    <li>
+                        <!-- あればアイコン画像を表示 -->
+                        {% if book.smallThumbnail %}
+                            <p> : <img src="{{ book.smallThumbnail }}" alt="書影" width="100"></p>
+                        {% endif %}
+                
+                        <!-- 書籍情報 -->
+                        <strong>{{ book.title }}</strong><br>
+                        {% if book.subtitle %} <em>{{ book.subtitle }}</em><br>{% endif %}
+                        著者: {{ book.authors | join(', ') if book.authors else '不明' }}<br>
+                        出版日: {{ book.publishedDate or '不明' }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </body>
+
+</html>
