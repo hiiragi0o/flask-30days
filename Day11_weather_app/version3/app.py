@@ -1,4 +1,5 @@
-# 都市IDによるAPIリクエスト
+# 「都市名」によるAPIリクエスト
+# OpenWeatherMap API から情報を取得してjsonで表示する
 import os
 from flask import Flask, Response, json, jsonify
 from flask.cli import load_dotenv
@@ -12,8 +13,8 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # OpenWeatherMapのAPIで天気を取得する
-    city_id = '1850144'  # 都市のid
-    api_url = f'https://api.openweathermap.org/data/2.5/weather?id={city_id}&appid={API_KEY}&lang=ja&units=metric'
+    city_name = "Tokyo"  # 都市名
+    api_url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&lang=ja&units=metric'
     response = requests.get(api_url)
     data = response.json()
 

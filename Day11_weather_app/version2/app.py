@@ -1,4 +1,5 @@
-# 都市名によるAPIリクエスト
+# 「都市名」によるAPIリクエスト
+# OpenWeatherMap API から情報を取得してjsonで表示する
 import os
 from flask import Flask, Response, json, jsonify
 from flask.cli import load_dotenv
