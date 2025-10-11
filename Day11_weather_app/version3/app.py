@@ -1,7 +1,7 @@
-# 「都市名」によるAPIリクエスト
-# OpenWeatherMap API から情報を取得してjsonで表示する
+# OpenWeatherMap API から情報を取得してhtmlで表示する
+from datetime import datetime
 import os
-from flask import Flask, Response, json, jsonify
+from flask import Flask, Response, json, jsonify, render_template, request
 from flask.cli import load_dotenv
 import requests
 
@@ -10,28 +10,40 @@ API_KEY = os.getenv('API_KEY') # .envを使うために必要
 
 app = Flask(__name__)
 
-@app.route('/')
+# 都市名で取得
+cities = {
+    '東京': 'Tokyo',
+    '名古屋': 'Nagoya',
+    '大阪': 'Osaka'
+}
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    # OpenWeatherMapのAPIで天気を取得する
-    city_name = "Tokyo"  # 都市名
-    api_url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&lang=ja&units=metric'
-    response = requests.get(api_url)
-    data = response.json()
+    weather_data = None
+    error = None
 
-    # エラーハンドリング追加
-    if response.status_code != 200 or 'name' not in data:
-        return jsonify({'error': data.get('message', 'APIリクエストに失敗しました')}), 500
+    if request.method == 'POST':
+        city_name = request.form.get('area') # フォームから都市を取得
 
-    # 取得した天気データを整形
-    weather_data = {
-        'city': data['name'],
-        'temperature': data['main']['temp'],
-        'description': data['weather'][0]['description'] 
-    }
+        # OpenWeatherMap API
+        api_url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&lang=ja&units=metric'
+        response = requests.get(api_url)
+        data = response.json()
 
-    # json.dumps を使い、Flask の Response で返す
-    response_json = json.dumps(weather_data, ensure_ascii=False) # ensure_ascii=False で日本語をそのまま出力
-    return Response(response_json, content_type='application/json; charset=utf-8')
+        # エラーハンドリング
+        if response.status_code != 200 or 'main' not in data:
+            error = data.get('message', '天気情報を取得できませんでした。')
+
+        else:
+            # 取得した天気データから必要なデータを抽出
+            weather_data = {
+                'city': data['name'],
+                'temperature': data['main']['temp'],
+                'description': data['weather'][0]['description'],
+                'icon': data['weather'][0]['icon']
+            }
+    
+    return render_template('index.html', cities=cities, error=error, weather_data=weather_data)
 
 
 if __name__ == '__main__':
