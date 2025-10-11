@@ -18,6 +18,9 @@ def index():
     response = requests.get(api_url)
     data = response.json()
 
+    # 整形前のJSON確認用
+    # return jsonify(data)
+
     # エラーハンドリング追加
     if response.status_code != 200 or 'name' not in data:
         return jsonify({'error': data.get('message', 'APIリクエストに失敗しました')}), 500
