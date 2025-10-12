@@ -1,7 +1,6 @@
 # OpenWeatherMap API から情報を取得してhtmlで表示する
-from datetime import datetime
 import os
-from flask import Flask, Response, json, jsonify, render_template, request
+from flask import Flask, render_template, request
 from flask.cli import load_dotenv
 import requests
 
