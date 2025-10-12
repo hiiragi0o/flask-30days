@@ -2,7 +2,7 @@
 {% block title %}Weather_app{% endblock %}
 
 {% block content %}
-    <h1>天気情報アプリ</h1>
+    <h1>週間天気予報アプリ</h1>
 
     <form action="/" method="POST">
         <label for="area">地域を選択: </label>
@@ -19,10 +19,24 @@
         <p style="color: red;">{{ error }}</p>
     {% endif %}
 
-    {% if weather_data %}
-        <h2>{{ weather_data.city }}</h2>
-        <p>気温: {{ weather_data.temperature }} ℃</p>
-        <p>天気: {{ weather_data.description }}</p>
-        <img src="https://openweathermap.org/img/wn/{{ weather_data.icon }}@2x.png" alt="天気アイコン">
+    {% if current_weather %}
+        <hr>
+        <h2>現在の天気 ({{ current_weather.city }})</h2>
+        <img src="https://openweathermap.org/img/wn/{{ current_weather.icon }}@2x.png" alt="天気アイコン">
+        <p>天気: {{ current_weather.description }}</p>
+        <p>気温: {{ current_weather.temperature }} ℃</p>
+
+        <hr>
+        <h2>5日間の予報</h2>
+        <div>
+            {% for f in forecast_list %}
+                <div>
+                    <p>{{ f.date }}</p>
+                    <img src="https://openweathermap.org/img/wn/{{ f.icon }}@2x.png" alt="icon">
+                    <p>{{ f.description }} ℃</p>
+                    <p>{{ f.temperature }}</p>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
 {% endblock %}
